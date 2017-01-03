@@ -1,0 +1,7 @@
+{
+  "name": "VideoMaker",
+  "short_name": "VideoMaker",
+  "description": "creates a video of the user interaction in a page",
+  "start_url": "/",
+  "display": "standalone"
+}

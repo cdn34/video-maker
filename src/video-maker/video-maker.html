@@ -1,0 +1,99 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+<dom-module id="video-maker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      svg {
+        position: absolute;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+      }
+      #toast{
+        width: 400px;
+        height: 50px;
+        position: fixed;
+        bottom: 60px;
+        left: 10px;
+        background: red;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px;
+        box-shadow: 0 2px 6px rgba(247, 18, 18, 0.77);
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+      }
+    </style>
+    <h2>Hello</h2>
+    <svg id="videoCanvas" style="display:none">
+        <polyline fill="none" stroke="black" 
+      points=""/>
+    </svg>
+    <div id="toast">
+      <p>Screen being recorded</p>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'video-maker',
+      properties: {
+        io: {
+          type:Object
+        },
+        startMovement:{
+          type:Boolean,
+          value:false
+        },
+        paths:{
+          type:Array,
+          value:[]
+        }
+      },
+
+      ready: function(){
+          this.io = io();
+          this.io.emit('new user', {"id":"12dsvfbnb", "html":document.getElementsByTagName('html')[0].innerHTML
+            .replace(/(<svg id="videoCanvas")(\sstyle="display:none")(\s[^>]*>)/g,"$1$3")});//Random id
+
+          document.body.addEventListener("mousedown",this._mouseDown.bind(this),false);
+          document.body.addEventListener("mousemove",this._mouseMove.bind(this),false);
+          document.body.addEventListener("mouseup",this._mouseUp.bind(this),false);
+      },
+      attached: function(){
+        var _this=this;
+        setTimeout(function() {
+          _this.$$("#toast").style.opacity = "0";
+        }, 2000);
+      },
+      _mouseDown: function(){
+        this.startMovement = true;
+        console.log("_mouseDown");
+      },
+      _mouseMove: function(){
+        if(!this.startMovement)
+          return;
+        console.log("_mouseMove");
+      },
+      _mouseUp: function(event){
+        this.startMovement = false;
+        var x = event.clientX;     // Get the horizontal coordinate
+        var y = event.clientY;     // Get the vertical coordinate
+        var points = this.$$("#videoCanvas").firstElementChild.getAttribute("points")+" "+x+','+y;
+        this.$$("#videoCanvas").firstElementChild.setAttribute("points",points);
+
+        this.io.emit('new image', {"id":"12dsvfbnb", "html":document.getElementsByTagName('html')[0].innerHTML
+          .replace(/(<svg id="videoCanvas")(\sstyle="display:none")(\s[^>]*>)/g,"$1$3")});//Random id
+      }
+
+    });
+  </script>
+</dom-module>
+

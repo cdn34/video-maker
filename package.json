@@ -1,0 +1,24 @@
+{
+  "name": "video-maker",
+  "version": "1.0.0",
+  "description": "creates a video of the user interaction in a page",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^1.7.2",
+    "videoshow": "^0.1.11",
+    "webshot": "^0.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

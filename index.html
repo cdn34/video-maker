@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>VideoMaker</title>
+    <meta name="description" content="VideoMaker description">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+    <base href="/">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link async rel="import" href="/src/video-maker/video-maker.html">
+    <style>
+      *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+      }
+      header{
+        height:10vh;
+        background:#3434bb;
+      }
+      main{
+        height:85vh;
+        background:#f6f6f6;
+      }
+      footer{
+        height:5vh;
+        background:#444444;
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <video-maker></video-maker>
+    </main>
+    <footer></footer>
+  </body>
+</html>
