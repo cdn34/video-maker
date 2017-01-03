@@ -3,7 +3,7 @@
 Creates a video of the user interaction in a page.
 
 ## Run Application
-
+```
 $ npm install
 ```
 $ bower install
